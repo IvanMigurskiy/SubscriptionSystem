@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  subscr_system:
+    extends:
+      file: docker-compose.yaml
+      service: subscr_system
+    ports:
+      - "8000:8000"
+    volumes:
+      - ${PWD}/system:/work_dir/system
+
+  postgres:
+    extends:
+      file: docker-compose.yaml
+      service: postgres
+    ports:
+      - "5432:5432"
+
+volumes:
+  posgtres_data:
+    driver: local
+
+networks:
+  subscr-net:
+    driver: bridge
